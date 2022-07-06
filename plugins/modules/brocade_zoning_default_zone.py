@@ -114,8 +114,8 @@ Brocade Fibre Channel default zone Configuration
 """
 
 
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_zoning import effective_get, effective_patch, cfg_save, cfg_abort, to_human_zoning, to_fos_zoning
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning import effective_get, effective_patch, cfg_save, cfg_abort, to_human_zoning, to_fos_zoning
 from ansible.module_utils.basic import AnsibleModule
 
 

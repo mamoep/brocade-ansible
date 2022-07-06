@@ -165,8 +165,8 @@ Brocade Fibre Channel zoning cfg configuration
 
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_zoning import zoning_common, cfg_post, cfg_delete, cfg_get, cfg_process_diff, cfg_process_diff_to_delete
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning import zoning_common, cfg_post, cfg_delete, cfg_get, cfg_process_diff, cfg_process_diff_to_delete
 
 
 def main():

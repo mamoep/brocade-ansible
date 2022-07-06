@@ -113,7 +113,7 @@ Brocade Fibre Channel certificatei installation
 """
 
 
-from ansible.module_utils.brocade_objects import singleton_helper
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_objects import singleton_helper
 from ansible.module_utils.basic import AnsibleModule
 
 

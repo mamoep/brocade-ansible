@@ -124,9 +124,9 @@ Brocade Fibre Channel generic facts gathering for singleton objects
 """
 
 
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_objects import singleton_get, to_human_singleton
-from ansible.module_utils.brocade_yang import str_to_human, str_to_yang
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_objects import singleton_get, to_human_singleton
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_yang import str_to_human, str_to_yang
 from ansible.module_utils.basic import AnsibleModule
 
 

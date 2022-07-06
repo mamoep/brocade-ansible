@@ -154,9 +154,9 @@ Brocade Fibre Channel Yang list processor
 """
 
 
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_yang import generate_diff, str_to_human, str_to_yang, is_full_human
-from ansible.module_utils.brocade_objects import list_get, to_fos_list, to_human_list, list_entry_keys_matched, list_entry_keys, list_patch, list_post, list_delete, list_helper, list_delete_helper
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_yang import generate_diff, str_to_human, str_to_yang, is_full_human
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_objects import list_get, to_fos_list, to_human_list, list_entry_keys_matched, list_entry_keys, list_patch, list_post, list_delete, list_helper, list_delete_helper
 from ansible.module_utils.basic import AnsibleModule
 
 

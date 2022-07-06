@@ -163,8 +163,8 @@ Brocade Fibre Channel zone configuration
 
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_zoning import zoning_common, zone_post, zone_delete, zone_get, zone_process_diff, zone_process_diff_to_delete
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning import zoning_common, zone_post, zone_delete, zone_get, zone_process_diff, zone_process_diff_to_delete
 
 
 def main():

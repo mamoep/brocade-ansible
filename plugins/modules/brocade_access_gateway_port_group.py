@@ -114,7 +114,7 @@ Brocade Fibre Channel AG port group configuration
 """
 
 
-from ansible.module_utils.brocade_objects import list_helper
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_objects import list_helper
 from ansible.module_utils.basic import AnsibleModule
 
 

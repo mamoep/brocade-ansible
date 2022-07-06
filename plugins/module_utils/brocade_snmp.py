@@ -5,7 +5,7 @@
 
 
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.brocade_ssh import ssh_and_configure
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_ssh import ssh_and_configure
 
 __metaclass__ = type
 

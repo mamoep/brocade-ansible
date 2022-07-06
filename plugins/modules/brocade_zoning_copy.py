@@ -127,8 +127,8 @@ Brocade Fibre Channel zoning object copy
 
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_zoning import zoning_common, zone_post, zone_delete, zone_get, process_member_diff, zoning_find_pair_common, alias_post, alias_delete, alias_get, alias_process_diff, alias_process_diff_to_delete, zone_process_diff, zone_process_diff_to_delete, cfg_post, cfg_delete, cfg_get, cfg_process_diff, cfg_process_diff_to_delete
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning import zoning_common, zone_post, zone_delete, zone_get, process_member_diff, zoning_find_pair_common, alias_post, alias_delete, alias_get, alias_process_diff, alias_process_diff_to_delete, zone_process_diff, zone_process_diff_to_delete, cfg_post, cfg_delete, cfg_get, cfg_process_diff, cfg_process_diff_to_delete
 
 
 def main():

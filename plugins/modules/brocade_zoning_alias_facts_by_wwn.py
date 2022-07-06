@@ -117,8 +117,8 @@ Brocade Fibre Channel facts gathering of zoning by WWN
 """
 
 
-from ansible.module_utils.brocade_connection import login, logout, exit_after_login
-from ansible.module_utils.brocade_zoning import defined_get
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_connection import login, logout, exit_after_login
+from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning import defined_get
 from ansible.module_utils.basic import AnsibleModule
 
 
