@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -158,7 +158,9 @@ def main():
     v3_accounts = input_params['v3_accounts']
     result = {"changed": False}
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_snmp", "v3_account", v3_accounts, False, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                throttle, vfid, "brocade_snmp", "v3_account", v3_accounts,
+                False, result, timeout)
 
 
 if __name__ == '__main__':

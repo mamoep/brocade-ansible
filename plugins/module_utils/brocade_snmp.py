@@ -16,7 +16,7 @@ Brocade logging utils
 
 
 def v1_trap_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
-                       vfid, result, v1_traps, ssh_hostkeymust, timeout):
+                  vfid, result, v1_traps, ssh_hostkeymust, timeout):
     """
         update existing user config configurations
 
@@ -40,7 +40,9 @@ def v1_trap_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
     if fos_version < "v9.0":
         for l_v1_trap in l_v1_traps:
             if "host" in l_v1_trap and l_v1_trap["host"] == "0.0.0.0":
-                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "snmpconfig --set snmpv1 -index " + str(l_v1_trap["index"]) + " -host 0.0.0.0" , "Committing configuration.....done.")
+                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust,
+                                                 "snmpconfig --set snmpv1 -index " + str(l_v1_trap["index"]) + " -host 0.0.0.0",
+                                                 "Committing configuration.....done.")
                 if rssh != 0:
                     result["failed"] = True
                     result["msg"] = "Failed to reset host IP to 0.0.0.0. " + sshstr
@@ -60,7 +62,7 @@ def v1_trap_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
 
 
 def v3_trap_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
-                       vfid, result, v3_traps, ssh_hostkeymust, timeout):
+                  vfid, result, v3_traps, ssh_hostkeymust, timeout):
     """
         update existing user config configurations
 
@@ -84,7 +86,9 @@ def v3_trap_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
     if fos_version < "v9.0":
         for l_v3_trap in l_v3_traps:
             if "host" in l_v3_trap and l_v3_trap["host"] == "0.0.0.0":
-                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "snmpconfig --set snmpv3 -index " + str(l_v3_trap["trap-index"]) + " -host 0.0.0.0" , "Committing configuration.....done.")
+                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust,
+                                                 "snmpconfig --set snmpv3 -index " + str(l_v3_trap["trap-index"]) + " -host 0.0.0.0",
+                                                 "Committing configuration.....done.")
                 if rssh != 0:
                     result["failed"] = True
                     result["msg"] = "Failed to reset host IP to 0.0.0.0. " + sshstr

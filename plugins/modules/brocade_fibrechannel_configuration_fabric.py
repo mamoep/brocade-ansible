@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -73,7 +73,7 @@ options:
           attributes supported by BSN REST API with - replaced with _.
         required: true
 notes:
-    - Specifying either fabric_principal_enabled and fabric_principal_priority 
+    - Specifying either fabric_principal_enabled and fabric_principal_priority
       may lead to failures.Both of them need to be specified in the playbook.
       Examples are insistent_domain_id_enabled - indicate if insistent domain
       id feature is enabled

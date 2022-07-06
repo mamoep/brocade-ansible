@@ -137,7 +137,9 @@ def main():
     maps_policies = input_params['maps_policies']
     result = {"changed": False}
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_maps", "maps_policy", maps_policies, True, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                throttle, vfid, "brocade_maps", "maps_policy", maps_policies,
+                True, result, timeout)
 
 
 if __name__ == '__main__':

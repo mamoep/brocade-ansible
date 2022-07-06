@@ -6,6 +6,7 @@
 
 import paramiko
 
+
 def ssh_and_configure(login, password, ipaddr, hostkeymust, cmdstr, expected):
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()

@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -194,10 +194,13 @@ def main():
     # user config creation or update does not happen at the same
     # time
     if delete_user_configs != None:
-        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, "brocade_security", "user_config", delete_user_configs, True, result, timeout)
+        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https,
+                                  ssh_hostkeymust, throttle, vfid, "brocade_security",
+                                  "user_config", delete_user_configs, True, result, timeout)
 
-
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, "brocade_security", "user_config", user_configs, False, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https,
+                ssh_hostkeymust, throttle, vfid, "brocade_security",
+                "user_config", user_configs, False, result, timeout)
 
 
 if __name__ == '__main__':

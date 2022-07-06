@@ -150,7 +150,9 @@ def fabric_patch(login, password, fos_ip_addr, fos_version, is_https, auth, vfid
     if "fabric-principal-priority" in l_diffs and "fabric-principal-enabled" in l_diffs:
         # if both are given, execute the CLI
         if l_diffs["fabric-principal-enabled"] == "true":
-            rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "fabricprincipal --enable -p " + l_diffs["fabric-principal-priority"] + " -f", "Principal Selection Mode enabled")
+            rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust,
+                                             "fabricprincipal --enable -p " + l_diffs["fabric-principal-priority"] + " -f",
+                                             "Principal Selection Mode enabled")
             if rssh != 0:
                 result["failed"] = True
                 result["msg"] = "Failed to set fabric-principal. " + sshstr
@@ -158,12 +160,13 @@ def fabric_patch(login, password, fos_ip_addr, fos_version, is_https, auth, vfid
                 result["changed"] = True
                 result["messages"] = "fabric-principal-enabled set"
         elif l_diffs["fabric-principal-enabled"] == "false":
-            #if disabling, must set the priority to 0
+            # if disabling, must set the priority to 0
             if l_diffs["fabric-principal-priority"] != "0":
                 result["failed"] = True
                 result["msg"] = "Priority must be 0 when disabling"
             else:
-                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "fabricprincipal --disable", "Principal Selection Mode disabled")
+                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust,
+                                                 "fabricprincipal --disable", "Principal Selection Mode disabled")
                 if rssh != 0:
                     result["failed"] = True
                     result["msg"] = "Failed to set fabric-principal. " + sshstr
@@ -179,7 +182,9 @@ def fabric_patch(login, password, fos_ip_addr, fos_version, is_https, auth, vfid
         if "fabric-principal-priority" in l_diffs:
             enabled_err, enabled, priority_err, priority = fabric_principal(login, password, fos_ip_addr, ssh_hostkeymust)
             if enabled_err is None and enabled:
-                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "fabricprincipal --enable -p " + l_diffs["fabric-principal-priority"] + " -f", "Principal Selection Mode enabled")
+                rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust,
+                                                 "fabricprincipal --enable -p " + l_diffs["fabric-principal-priority"] + " -f",
+                                                 "Principal Selection Mode enabled")
                 if rssh != 0:
                     result["failed"] = True
                     result["msg"] = "Failed to set fabric-principal-priority. " + sshstr
@@ -317,7 +322,7 @@ def port_configuration_patch(login, password, fos_ip_addr, fos_version, is_https
             rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "creditrecovmode --cfg onLrThresh", "")
             if rssh != 0:
                 result["failed"] = True
-                result["msg"] = "Failed to credit-recovery-mode to onLrThresh. "+ sshstr
+                result["msg"] = "Failed to credit-recovery-mode to onLrThresh. " + sshstr
             else:
                 result["changed"] = True
                 result["messages"] = "credit-recovery-mode set to onLrThresh"

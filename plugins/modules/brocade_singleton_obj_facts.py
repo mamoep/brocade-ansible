@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -169,8 +169,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -179,9 +179,9 @@ def main():
     facts['ssh_hostkeymust'] = ssh_hostkeymust
 
     ret_code, response = singleton_get(fos_user_name, fos_password, fos_ip_addr,
-                                  module_name, obj_name, fos_version,
-                                  https, auth, vfid, result,
-                                  ssh_hostkeymust, timeout)
+                                       module_name, obj_name, fos_version,
+                                       https, auth, vfid, result,
+                                       ssh_hostkeymust, timeout)
     if ret_code != 0:
         result["singleton_get"] = ret_code
         exit_after_login(fos_ip_addr, https, auth, result, module, timeout)

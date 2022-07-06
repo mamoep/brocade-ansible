@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -68,7 +68,7 @@ options:
           default value.
         type: int
     show_status:
-        description: 
+        description:
         - Message id information
         type: dict
         required: true
@@ -94,7 +94,7 @@ EXAMPLES = """
       credential: "{{credential}}"
       vfid: -1
       show_status:
-        message_id: 
+        message_id:
 
 """
 

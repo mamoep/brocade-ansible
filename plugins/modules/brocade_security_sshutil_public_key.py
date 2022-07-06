@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -154,7 +154,10 @@ def main():
     # if delete sshutil_public_key is not None, then we make sure
     # the user config is not present.
     if delete_sshutil_public_key != None:
-        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, "brocade_security", "sshutil_public_key", delete_sshutil_public_key, True, result, timeout)
+        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password,
+                                  https, ssh_hostkeymust, throttle, vfid, "brocade_security",
+                                  "sshutil_public_key", delete_sshutil_public_key, True,
+                                  result, timeout)
 
 
 if __name__ == '__main__':

@@ -31,6 +31,7 @@ ERROR_GENERIC = -1
 ERROR_LIST_EMPTY = -2
 ERROR_SERVER_BUSY = -3
 
+
 def full_url_get(is_https, fos_ip_addr, path):
     if isinstance(is_https, bool):
         if is_https:
@@ -43,11 +44,13 @@ def full_url_get(is_https, fos_ip_addr, path):
         # by default, return HTTP
         return HTTP + fos_ip_addr + str_to_yang(path), False
 
+
 def url_post(fos_ip_addr, is_https, auth, vfid, result, url, body, timeout):
 
     retcode, post_resp = url_post_resp(fos_ip_addr, is_https, auth, vfid, result, url, body, timeout)
 
     return retcode
+
 
 def url_post_resp(fos_ip_addr, is_https, auth, vfid, result, url, body, timeout):
     """
@@ -172,6 +175,7 @@ def url_delete(fos_ip_addr, is_https, auth, vfid, result, url, body, timeout):
 
     return 0
 
+
 messages_404 = [
     "No entries found",
     "No syslog servers are configured",
@@ -187,6 +191,7 @@ messages_404 = [
     "No public keys found",
     "No device was found"
     ]
+
 
 empty_messages_400 = [
     "Not supported on this platform",
@@ -227,7 +232,7 @@ def chassis_not_ready_message(errs):
 def url_helper(url, body, method, auth, result, validate_certs, timeout, credential=None):
     myheaders = {}
     if credential == None:   
-        myheaders={
+        myheaders = {
             "Authorization": auth["auth"],
             'Content-Type': 'application/yang-data+xml'}
     else:
@@ -288,6 +293,7 @@ def url_helper(url, body, method, auth, result, validate_certs, timeout, credent
     result[method + "_url"] = url
 
     return 0, 0, None, get_resp,
+
 
 def url_get_to_dict(fos_ip_addr, is_https, auth, vfid, result, url, timeout):
     """

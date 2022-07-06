@@ -136,6 +136,7 @@ def to_human_fc(port_config):
         elif port_config["max_speed"] == "0":
             port_config["max_speed"] = "Auto"
 
+
 def to_fos_fc(port_config, result):
     human_to_yang(port_config)
 

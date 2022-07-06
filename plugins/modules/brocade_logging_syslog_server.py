@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -86,7 +86,7 @@ options:
           All writable attributes supported
           by BSN REST API with - replaced with _.
         required: true
-        type: list 
+        type: list
 '''
 
 
@@ -169,7 +169,9 @@ def main():
     if all_entries == None:
         all_entries = False
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_logging", "syslog_server", syslog_servers, all_entries, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                throttle, vfid, "brocade_logging", "syslog_server",
+                syslog_servers, all_entries, result, timeout)
 
 
 if __name__ == '__main__':

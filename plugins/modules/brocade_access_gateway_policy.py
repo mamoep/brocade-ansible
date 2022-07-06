@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -77,7 +77,7 @@ options:
           is processed.
           Pause statement can be used to delay subsequent tasks to be executed
           prior to switch online while executing multiple tasks from the
-          same playbook. 
+          same playbook.
         required: false
         type: bool
 
@@ -159,7 +159,9 @@ def main():
     force = input_params['force']
     result = {"changed": False}
 
-    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_access_gateway", "policy", policy, result, timeout, force)
+    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                     throttle, vfid, "brocade_access_gateway", "policy",
+                     policy, result, timeout, force)
 
 
 if __name__ == '__main__':

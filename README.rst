@@ -567,6 +567,4 @@ brocade-security            ipfilter-rule
 Contact
 -------
 
-::
-
-   Automation.BSN@broadcom.com
+Use the issue tracker

@@ -8,7 +8,6 @@ from __future__ import (absolute_import, division, print_function)
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_url import url_get_to_dict, url_patch, full_url_get, url_patch_single_object, url_post, url_delete, url_post_resp, ERROR_LIST_EMPTY
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_yang import yang_to_human, human_to_yang, str_to_yang, str_to_human, generate_diff, is_full_human
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_ssh import ssh_and_configure
-from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_interface import to_fos_fc, to_human_fc
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_chassis import chassis_get, chassis_patch
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_fibrechannel_configuration import fabric_get, fabric_patch, port_configuration_get, port_configuration_patch
 from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_fibrechannel_switch import to_human_switch, to_fos_switch, fc_switch_get, fc_switch_patch
@@ -32,15 +31,17 @@ OP_PREFIX = "/rest/operations/"
 
 BASE64_PWD_ERROR = "Password can not be decoded"
 
+
 def to_base64(s):
 
     if not isinstance(s, str):
-       return BASE64_PWD_ERROR
+        return BASE64_PWD_ERROR
 
     try:
-       return base64.b64encode(s.encode('ascii')).decode('utf-8')
+        return base64.b64encode(s.encode('ascii')).decode('utf-8')
     except Exception:
-       return BASE64_PWD_ERROR
+        return BASE64_PWD_ERROR
+
 
 def to_human_singleton(module_name, obj_name, attributes):
     yang_to_human(attributes)
@@ -73,7 +74,9 @@ def to_fos_singleton(module_name, obj_name, attributes, result):
             if k == "new-password":
                 attributes[k] = to_base64(attributes[k])
 
-        if module_name == "brocade_security" and (obj_name == "security_certificate_action" or obj_name == "sshutil_public_key_action" or obj_name == "sec_crypto_cfg_template_action"):
+        if module_name == "brocade_security" and (obj_name == "security_certificate_action" or
+                                                  obj_name == "sshutil_public_key_action" or
+                                                  obj_name == "sec_crypto_cfg_template_action"):
             if k == "remote-user-password":
                 attributes[k] = to_base64(attributes[k])
 
@@ -118,13 +121,13 @@ def singleton_get(login, password, fos_ip_addr, module_name, obj_name, fos_versi
 
     # get is not support for these modules. Just return empty
     if module_name == "brocade_security" and obj_name == "security_certificate_action":
-        return 0, ({"Response" : {str_to_yang(obj_name): {}}})
+        return 0, ({"Response": {str_to_yang(obj_name): {}}})
     if module_name == "brocade_security" and obj_name == "security_certificate_generate":
-        return 0, ({"Response" : {str_to_yang(obj_name): {}}})
+        return 0, ({"Response": {str_to_yang(obj_name): {}}})
     if module_name == "brocade_security" and obj_name == "sshutil_public_key_action":
-        return 0, ({"Response" : {str_to_yang(obj_name): {}}})
+        return 0, ({"Response": {str_to_yang(obj_name): {}}})
     if module_name == "brocade_security" and obj_name == "password":
-        return 0, ({"Response" : {str_to_yang(obj_name): {}}})
+        return 0, ({"Response": {str_to_yang(obj_name): {}}})
 
     full_url, validate_certs = full_url_get(is_https,
                                             fos_ip_addr,
@@ -279,101 +282,103 @@ def to_fos_list(module_name, list_name, attributes_list, result):
 
     return 0
 
+
 list_keys = {
     "brocade_access_gateway": {
-        "port_group" : ["port_group_id"],
-        "n_port_map" : ["n_port"],
+        "port_group": ["port_group_id"],
+        "n_port_map": ["n_port"],
     },
     "brocade_extension_ip_route": {
-        "extension_ip_route" : ["name", "dp_id", "ip_address", "ip_prefix_length"],
+        "extension_ip_route": ["name", "dp_id", "ip_address", "ip_prefix_length"],
     },
     "brocade_extension_ipsec_policy": {
-        "extension_ipsec_policy" : ["policy_name"],
+        "extension_ipsec_policy": ["policy_name"],
     },
     "brocade_extension_tunnel": {
-        "extension_tunnel" : ["name"],
-        "extension_circuit" : ["name", "circuit_id"],
+        "extension_tunnel": ["name"],
+        "extension_circuit": ["name", "circuit_id"],
     },
     "brocade_fabric": {
-        "fabric_switch" : ["name"],
+        "fabric_switch": ["name"],
     },
     "brocade_fdmi": {
-        "hba" : ["hba_id"],
-        "port" : ["port_name"],
+        "hba": ["hba_id"],
+        "port": ["port_name"],
     },
     "brocade_fibrechannel_diagnostics": {
-        "fibrechannel_diagnostics" : ["name"],
+        "fibrechannel_diagnostics": ["name"],
     },
     "brocade_fibrechannel_logical_switch": {
-        "fibrechannel_logical_switch" : ["fabric_id"],
+        "fibrechannel_logical_switch": ["fabric_id"],
     },
     "brocade_fibrechannel_switch": {
-        "fibrechannel_switch" : ["name"],
+        "fibrechannel_switch": ["name"],
     },
     "brocade_fibrechannel_trunk": {
-        "trunk_area" : ["trunk_index"],
+        "trunk_area": ["trunk_index"],
     },
     "ficon": {
-        "ficon_logical_path" : ["link_address", "channel_image_id"],
+        "ficon_logical_path": ["link_address", "channel_image_id"],
     },
     "brocade_fru": {
-        "blade" : ["slot_number"],
+        "blade": ["slot_number"],
     },
     "brocade_interface": {
-        "fibrechannel" : ["name"],
-        "fibrechannel_statistics" : ["name"],
-        "extension_ip_interface" : ["name", "ip_address", "dp_id"],
-        "gigabitethernet" : ["name"],
-        "gigabitethernet_statistics" : ["name"],
+        "fibrechannel": ["name"],
+        "fibrechannel_statistics": ["name"],
+        "extension_ip_interface": ["name", "ip_address", "dp_id"],
+        "gigabitethernet": ["name"],
+        "gigabitethernet_statistics": ["name"],
     },
     "brocade_license": {
-        "license" : ["name"],
+        "license": ["name"],
     },
     "brocade_logging": {
-        "syslog_server" : ["server"],
-        "raslog" : ["message_id"],
-        "raslog_module" : ["module_id"],
-        "log_quiet_control" : ["log_type"],
+        "syslog_server": ["server"],
+        "raslog": ["message_id"],
+        "raslog_module": ["module_id"],
+        "log_quiet_control": ["log_type"],
     },
     "brocade_maps": {
-        "paused_cfg" : ["group_type"],
-        "group" : ["name"],
-        "rule" : ["name"],
-        "maps_policy" : ["name"],
+        "paused_cfg": ["group_type"],
+        "group": ["name"],
+        "rule": ["name"],
+        "maps_policy": ["name"],
     },
     "brocade_media": {
-        "media_rdp" : ["name"],
+        "media_rdp": ["name"],
     },
     "brocade_module_version": {
     },
     "brocade_name_server": {
-        "fibrechannel_name_server" : ["port_id"],
+        "fibrechannel_name_server": ["port_id"],
     },
     "brocade_security": {
-        "ipfilter_policy" : ["name"],
-        "ipfilter_rule" : ["policy_name", "index"],
-        "user_specific_password_cfg" : ["user_name"],
-        "user_config" : ["name"],
-        "radius_server" : ["server"],
-        "tacacs_server" : ["server"],
-        "ldap_server" : ["server"],
-        "ldap_role_map" : ["ldap_role"],
-        "sshutil_key" : ["algorithm_type", "key_type"],
-        "sshutil_public_key" : ["user_name"],
+        "ipfilter_policy": ["name"],
+        "ipfilter_rule": ["policy_name", "index"],
+        "user_specific_password_cfg": ["user_name"],
+        "user_config": ["name"],
+        "radius_server": ["server"],
+        "tacacs_server": ["server"],
+        "ldap_server": ["server"],
+        "ldap_role_map": ["ldap_role"],
+        "sshutil_key": ["algorithm_type", "key_type"],
+        "sshutil_public_key": ["user_name"],
     },
     "brocade_snmp": {
-        "mib_capability" : ["mib_name"],
-        "trap_capability" : ["trap_name"],
-        "v1_account" : ["index"],
-        "v1_trap" : ["index"],
-        "v3_account" : ["index"],
-        "v3_trap" : ["trap_index"],
-        "access_control" : ["index"],
+        "mib_capability": ["mib_name"],
+        "trap_capability": ["trap_name"],
+        "v1_account": ["index"],
+        "v1_trap": ["index"],
+        "v3_account": ["index"],
+        "v3_trap": ["trap_index"],
+        "access_control": ["index"],
     },
     "brocade_module_id": {
-        "my_list_name" : ["my_key_leaf"],
+        "my_list_name": ["my_key_leaf"],
     },
 }
+
 
 def list_entry_keys_matched(e1, e2, module_name, list_name):
     keys = list_entry_keys(module_name, list_name)
@@ -388,12 +393,14 @@ def list_entry_keys_matched(e1, e2, module_name, list_name):
 
     return False
 
+
 def list_entry_keys(module_name, list_name):
     if module_name in list_keys:
         if list_name in list_keys[module_name]:
             return list_keys[module_name][list_name]
 
     return []
+
 
 def list_get(login, password, fos_ip_addr, module_name, list_name, fos_version, is_https, auth, vfid, result, ssh_hostkeymust, timeout):
     if module_name == "brocade_fibrechannel_switch" and list_name == "fibrechannel_switch":
@@ -576,15 +583,15 @@ def list_patch(login, password, fos_ip_addr, module_name, list_name, fos_version
         empty_port_groups = []
         for port_group in entries:
             if "port-group-n-ports" in port_group and port_group["port-group-n-ports"] is not None and "n-port" in port_group["port-group-n-ports"] and port_group["port-group-n-ports"]["n-port"] is not None:
-                empty_port_groups.append({"port-group-id":port_group["port-group-id"], "port-group-n-ports":{"n-port": None}})
+                empty_port_groups.append({"port-group-id": port_group["port-group-id"], "port-group-n-ports": {"n-port": None}})
             if "port-group-f-ports" in port_group and port_group["port-group-f-ports"] is not None and "f-port" in port_group["port-group-f-ports"] and port_group["port-group-f-ports"]["f-port"] is not None:
-                empty_port_groups.append({"port-group-id":port_group["port-group-id"], "port-group-f-ports":{"f-port": None}})
+                empty_port_groups.append({"port-group-id": port_group["port-group-id"], "port-group-f-ports": {"f-port": None}})
         if len(empty_port_groups) > 0:
             empty_xml_str = list_xml_str(result, module_name, list_name, empty_port_groups)
 
             result["patch_str_empty_ag"] = empty_xml_str
             empty_patch_result = url_patch(fos_ip_addr, is_https, auth, vfid,
-                    result, full_url, empty_xml_str, timeout)
+                                           result, full_url, empty_xml_str, timeout)
             result["patch_str_empty_ag_result"] = empty_patch_result
 
     # AG always expect fports to be removed from another nport before
@@ -596,7 +603,7 @@ def list_patch(login, password, fos_ip_addr, module_name, list_name, fos_version
         empty_n_port_maps = []
         for n_port_map in entries:
             if "configured-f-port-list" in n_port_map and "f-port" in n_port_map["configured-f-port-list"] and n_port_map["configured-f-port-list"]["f-port"] is not None:
-                empty_n_port_maps.append({"n-port":n_port_map["n-port"], "configured-f-port-list":{"f-port": None}})
+                empty_n_port_maps.append({"n-port": n_port_map["n-port"], "configured-f-port-list": {"f-port": None}})
         if len(empty_n_port_maps) > 0:
             empty_xml_str = list_xml_str(result, module_name, list_name, empty_n_port_maps)
 
@@ -636,7 +643,7 @@ def list_post(login, password, fos_ip_addr, module_name, list_name, fos_version,
     result["post_str"] = xml_str
 
     return url_post(fos_ip_addr, is_https, auth, vfid, result,
-                     full_url, xml_str, timeout)
+                    full_url, xml_str, timeout)
 
 
 def list_delete(login, password, fos_ip_addr, module_name, list_name, fos_version, is_https, auth, vfid, result, entries, ssh_hostkeymust, timeout):
@@ -667,7 +674,7 @@ def list_delete(login, password, fos_ip_addr, module_name, list_name, fos_versio
     result["delete_str"] = xml_str
 
     return url_delete(fos_ip_addr, is_https, auth, vfid, result,
-                     full_url, xml_str, timeout)
+                      full_url, xml_str, timeout)
 
 
 def singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, module_name, obj_name, attributes, result, timeout, force=False):
@@ -679,8 +686,8 @@ def singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ss
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -734,9 +741,9 @@ def singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ss
                     switch_module = "brocade_fibrechannel_switch"
                     switch_obj = "fibrechannel_switch"
                     ret_code, response = singleton_get(fos_user_name, fos_password, fos_ip_addr,
-                                       switch_module, switch_obj, fos_version,
-                                       https, auth, vfid, result,
-                                       ssh_hostkeymust, timeout)
+                                                       switch_module, switch_obj, fos_version,
+                                                       https, auth, vfid, result,
+                                                       ssh_hostkeymust, timeout)
                     if ret_code != 0:
                         exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -803,9 +810,9 @@ def singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ss
                     switch_module = "brocade_fibrechannel_switch"
                     switch_obj = "fibrechannel_switch"
                     ret_code, response = singleton_get(fos_user_name, fos_password, fos_ip_addr,
-                                       switch_module, switch_obj, fos_version,
-                                       https, auth, vfid, result,
-                                       ssh_hostkeymust, timeout)
+                                                       switch_module, switch_obj, fos_version,
+                                                       https, auth, vfid, result,
+                                                       ssh_hostkeymust, timeout)
                     if ret_code != 0:
                         exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -973,9 +980,9 @@ def list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hos
     if module_name == "brocade_security" and list_name == "user_config":
         new_diff_entries = []
         for diff_entry in diff_entries:
-            # password canot change using patch update
+            # password cannot change using patch update
             # any entries with password are popp'ed off.
-            if not "password" in diff_entry:
+            if "password" not in diff_entry:
                 new_diff_entries.append(diff_entry)
         diff_entries = new_diff_entries
     if module_name == "brocade_security" and list_name == "auth_spec":
@@ -1062,7 +1069,8 @@ def list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hos
     if len(diff_entries) > 0:
         if not module.check_mode:
             ret_code = 0
-            ret_code = list_patch(fos_user_name, fos_password, fos_ip_addr, module_name, list_name, fos_version, https, auth, vfid, result, diff_entries, ssh_hostkeymust, timeout)
+            ret_code = list_patch(fos_user_name, fos_password, fos_ip_addr, module_name, list_name,
+                                  fos_version, https, auth, vfid, result, diff_entries, ssh_hostkeymust, timeout)
             if ret_code != 0:
                 exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -1070,7 +1078,8 @@ def list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hos
 
     if len(add_entries) > 0:
         if not module.check_mode:
-            ret_code = list_post(fos_user_name, fos_password, fos_ip_addr, module_name, list_name, fos_version, https, auth, vfid, result, add_entries, ssh_hostkeymust, timeout)
+            ret_code = list_post(fos_user_name, fos_password, fos_ip_addr, module_name, list_name,
+                                 fos_version, https, auth, vfid, result, add_entries, ssh_hostkeymust, timeout)
             if ret_code != 0:
                 exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -1078,7 +1087,8 @@ def list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hos
 
     if len(delete_entries) > 0 and all_entries:
         if not module.check_mode:
-            ret_code = list_delete(fos_user_name, fos_password, fos_ip_addr, module_name, list_name, fos_version, https, auth, vfid, result, delete_entries, ssh_hostkeymust, timeout)
+            ret_code = list_delete(fos_user_name, fos_password, fos_ip_addr, module_name, list_name,
+                                   fos_version, https, auth, vfid, result, delete_entries, ssh_hostkeymust, timeout)
             if ret_code != 0:
                 exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -1086,6 +1096,7 @@ def list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hos
 
     logout(fos_ip_addr, https, auth, result, timeout)
     module.exit_json(**result)
+
 
 def list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, module_name, list_name, entries, all_entries, result, timeout):
 
@@ -1100,8 +1111,8 @@ def list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, 
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -1148,7 +1159,8 @@ def list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, 
 
     if len(delete_entries) > 0:
         if not module.check_mode:
-            ret_code = list_delete(fos_user_name, fos_password, fos_ip_addr, module_name, list_name, fos_version, https, auth, vfid, result, delete_entries, ssh_hostkeymust, timeout)
+            ret_code = list_delete(fos_user_name, fos_password, fos_ip_addr, module_name, list_name,
+                                   fos_version, https, auth, vfid, result, delete_entries, ssh_hostkeymust, timeout)
             if ret_code != 0:
                 exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 
@@ -1167,8 +1179,8 @@ def operation_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ss
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -1181,10 +1193,10 @@ def operation_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ss
     if not module.check_mode:
         ret_code = 0
         ret_code, resp = operation_post(fos_user_name, fos_password, fos_ip_addr,
-                                   op_name, in_name,
-                                   fos_version, https,
-                                   auth, vfid, result, attributes,
-                                   ssh_hostkeymust, timeout)
+                                        op_name, in_name,
+                                        fos_version, https,
+                                        auth, vfid, result, attributes,
+                                        ssh_hostkeymust, timeout)
         if ret_code != 0:
             exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 

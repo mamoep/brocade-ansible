@@ -46,7 +46,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -59,7 +59,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -207,8 +207,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 

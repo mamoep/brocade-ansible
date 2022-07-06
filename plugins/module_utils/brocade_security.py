@@ -68,7 +68,7 @@ def ipfilter_policy_get(fos_ip_addr, is_https, auth, vfid, result, timeout):
                                             REST_IPFILTER_POLICY)
 
     return (url_get_to_dict(fos_ip_addr, is_https, auth, vfid,
-                              result, full_url, timeout))
+                            result, full_url, timeout))
 
 
 def ipfilter_policy_xml_str(result, rules):
@@ -91,7 +91,7 @@ def ipfilter_policy_xml_str(result, rules):
 
 
 def ipfilter_policy_patch(fos_ip_addr, is_https, auth,
-                       vfid, result, policies, timeout):
+                          vfid, result, policies, timeout):
     """
         update existing ip filter configurations
 
@@ -153,7 +153,7 @@ def user_config_xml_str(result, users):
 
 
 def user_config_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
-                       vfid, result, users, ssh_hostkeymust, timeout):
+                      vfid, result, users, ssh_hostkeymust, timeout):
     """
         update existing user config configurations
 
@@ -180,7 +180,7 @@ def user_config_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
         for l_user in l_users:
             if "account-enabled" in l_user:
                 if l_user["account-enabled"] == "true":
-                    rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "userconfig --change " + l_user["name"] + " -e yes" , "")
+                    rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "userconfig --change " + l_user["name"] + " -e yes", "")
                     if rssh != 0:
                         result["failed"] = True
                         result["msg"] = "Failed to enable account. " + sshstr
@@ -188,7 +188,7 @@ def user_config_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
                         result["changed"] = True
                         result["messages"] = "account enabled"
                 elif l_user["account-enabled"] == "false":
-                    rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "userconfig --change " + l_user["name"] + " -e no" , "")
+                    rssh, sshstr = ssh_and_configure(login, password, fos_ip_addr, ssh_hostkeymust, "userconfig --change " + l_user["name"] + " -e no", "")
                     if rssh != 0:
                         result["failed"] = True
                         result["msg"] = "Failed to disable account. " + sshstr
@@ -220,8 +220,7 @@ def user_config_patch(login, password, fos_ip_addr, fos_version, is_https, auth,
                      full_url, xml_str, timeout)
 
 
-def user_config_post(fos_ip_addr, is_https, auth,
-                       vfid, result, users, timeout):
+def user_config_post(fos_ip_addr, is_https, auth, vfid, result, users, timeout):
     """
         add to ipfilter policy configurations
 

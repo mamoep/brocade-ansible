@@ -21,7 +21,7 @@ description:
   confirm that an existing object's and the new object's contents
   match. If they do not, the new object may be created or
   overwritten to match the contents.
-  
+
   If an existing object is Target Driven Zone, the module
   will error out. If objects do not match in terms of type (Alias,
   Zone, or Cfg), the module will error out.
@@ -48,7 +48,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -61,7 +61,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -167,8 +167,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -182,9 +182,9 @@ def main():
         object_name_dict["name"] = new_name
         obj_list = [object_name_dict]
         zoning_common(fos_ip_addr, https, auth, vfid, result, module, obj_list,
-                  False, False, None, "alias",
-                  alias_process_diff, alias_process_diff_to_delete, alias_get,
-                  alias_post, alias_delete, None, timeout)
+                      False, False, None, "alias",
+                      alias_process_diff, alias_process_diff_to_delete, alias_get,
+                      alias_post, alias_delete, None, timeout)
         ret_code = logout(fos_ip_addr, https, auth, result, timeout)
         module.exit_json(**result)
 
@@ -204,9 +204,9 @@ def main():
         object_name_dict["name"] = new_name
         obj_list = [object_name_dict]
         zoning_common(fos_ip_addr, https, auth, vfid, result, module, obj_list,
-                  False, False, None, "zone",
-                  zone_process_diff, zone_process_diff_to_delete, zone_get,
-                  zone_post, zone_delete, None, timeout)
+                      False, False, None, "zone",
+                      zone_process_diff, zone_process_diff_to_delete, zone_get,
+                      zone_post, zone_delete, None, timeout)
         ret_code = logout(fos_ip_addr, https, auth, result, timeout)
         module.exit_json(**result)
 
@@ -220,13 +220,12 @@ def main():
         object_name_dict["name"] = new_name
         obj_list = [object_name_dict]
         zoning_common(fos_ip_addr, https, auth, vfid, result, module, obj_list,
-                  False, False, None, "cfg",
-                  cfg_process_diff, cfg_process_diff_to_delete, cfg_get,
-                  cfg_post, cfg_delete, None, timeout)
+                      False, False, None, "cfg",
+                      cfg_process_diff, cfg_process_diff_to_delete, cfg_get,
+                      cfg_post, cfg_delete, None, timeout)
         ret_code = logout(fos_ip_addr, https, auth, result, timeout)
         module.exit_json(**result)
 
-    
     result["failed"] = True
     result["msg"] = "no such object was found"
     ret_code = logout(fos_ip_addr, https, auth, result, timeout)

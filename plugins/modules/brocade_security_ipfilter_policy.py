@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -183,11 +183,15 @@ def main():
     # policy creation or update does not happen at the same
     # time
     if delete_policies != None:
-        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_security", "ipfilter_policy", delete_policies, True, result, timeout)
+        return list_delete_helper(module, fos_ip_addr, fos_user_name, fos_password,
+                                  https, True, throttle, vfid, "brocade_security",
+                                  "ipfilter_policy", delete_policies, True, result, timeout)
 
     # if I am dealing with active_policy set, it must be policy list update
     if active_policy == None:
-        return list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_security", "ipfilter_policy", ipfilter_policies, False, result, timeout)
+        return list_helper(module, fos_ip_addr, fos_user_name, fos_password,
+                           https, True, throttle, vfid, "brocade_security",
+                           "ipfilter_policy", ipfilter_policies, False, result, timeout)
 
     if not is_full_human(ipfilter_policies, result):
         module.exit_json(**result)
@@ -196,13 +200,13 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
-    ret_code, response = ipfilter_policy_get(
-        fos_ip_addr, https, auth, vfid, result, timeout)
+    ret_code, response = ipfilter_policy_get(fos_ip_addr,
+                                             https, auth, vfid, result, timeout)
     if ret_code != 0:
         exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
 

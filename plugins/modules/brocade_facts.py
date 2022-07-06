@@ -229,6 +229,7 @@ valid_areas = [
     "brocade_security_ldap_role_map"
     ]
 
+
 def main():
     """
     Main function
@@ -266,8 +267,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -429,7 +430,6 @@ def main():
                 list_name = "ldap_role_map"
                 get_list = True
 
-
             if get_singleton:
                 ret_code, response = singleton_get(fos_user_name, fos_password, fos_ip_addr,
                                                    module_name, obj_name, fos_version,
@@ -495,9 +495,9 @@ def main():
 
                 zoning = {}
                 zoning["defined_configuration"] = {
-                    "aliases" : [],
-                    "zones" : [],
-                    "cfgs" : []
+                    "aliases": [],
+                    "zones": [],
+                    "cfgs": []
                 }
 
                 if response["Response"]["defined-configuration"]["cfg"] is not None:
@@ -515,7 +515,6 @@ def main():
                             }
                         )
 
-            
                 if response["Response"]["defined-configuration"]["alias"] is not None:
                     r_aliases = response["Response"]["defined-configuration"]["alias"]
                     if not isinstance(response["Response"]["defined-configuration"]["alias"], list):

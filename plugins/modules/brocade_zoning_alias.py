@@ -46,7 +46,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -59,7 +59,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -83,7 +83,7 @@ options:
           If no aliases_to_delete are listed, aliases is required.
           aliases_to_delete and aliases are mutually exclusive.
         required: false
-        type: list 
+        type: list
     members_add_only:
         description:
         - If set to True, new members will be added and old members
@@ -122,7 +122,7 @@ EXAMPLES = """
           - 11:22:33:44:55:66:77:88
       - name: Target1
         members:
-          - 22:22:33:44:55:66:77:99      
+          - 22:22:33:44:55:66:77:99
       - name: Target2
         members:
           - 22:22:33:44:55:66:77:aa
@@ -206,8 +206,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 

@@ -156,7 +156,9 @@ def main():
     logical_switches = input_params['logical_switches']
     result = {"changed": False}
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_fibrechannel_logical_switch", "fibrechannel_logical_switch", logical_switches, all_entries, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                throttle, vfid, "brocade_fibrechannel_logical_switch",
+                "fibrechannel_logical_switch", logical_switches, all_entries, result, timeout)
 
 
 if __name__ == '__main__':

@@ -78,7 +78,7 @@ def login(fos_ip_addr, fos_user_name, fos_password, is_https, throttle, result, 
 
     # get fos version from the default switch
     rtype, rdict = url_get_to_dict(fos_ip_addr, is_https, auth, -1,
-                                           result, full_switch_url, timeout)
+                                   result, full_switch_url, timeout)
     if rtype != 0:
         result["failed"] = True
         result["msg"] = "API failed to return switch firmware version"

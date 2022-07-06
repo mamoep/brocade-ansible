@@ -13,6 +13,7 @@ __metaclass__ = type
 Brocade yang utilities
 """
 
+
 def str_to_yang(istring):
     return istring.replace("_", "-")
 
@@ -50,6 +51,7 @@ def is_full_human(inputs, result):
                         return False
     return True
 
+
 def yang_to_human(attributes):
     yang_attributes = {}
     for k, v in attributes.items():
@@ -80,7 +82,7 @@ def yang_to_human(attributes):
     for k, v in yang_attributes.items():
         attributes[k] = v
 
-    
+
 def human_to_yang(attributes):
     human_attributes = {}
     for k, v in attributes.items():
@@ -109,7 +111,7 @@ def find_diff(result, yang_key, new_value, c_config, diff_attributes):
     if c_config is not None and yang_key in c_config:
         if isinstance(new_value, bool):
             # first convert the string to real boolean
-            # then you can compare to new value to see if 
+            # then you can compare to new value to see if
             # the attribute to be set to which string boolean values
             c_bool = c_config[yang_key]
             if new_value != c_bool:
@@ -129,20 +131,20 @@ def find_diff(result, yang_key, new_value, c_config, diff_attributes):
         elif isinstance(new_value, list):
             # if the new value is a list, compare the diff
             if (c_config[yang_key] == None):
-                diff_attributes[yang_key] = new_value 
+                diff_attributes[yang_key] = new_value
             elif len(new_value) != len(c_config[yang_key]):
-                diff_attributes[yang_key] = new_value 
+                diff_attributes[yang_key] = new_value
             else:
                 for nentry in new_value:
                     found = False
                     for centry in c_config[yang_key]:
                         if nentry == centry:
-                            found = True 
+                            found = True
                     if not found:
-                        diff_attributes[yang_key] = new_value 
+                        diff_attributes[yang_key] = new_value
         else:
             if str(new_value) != str(c_config[yang_key]):
-                diff_attributes[yang_key] = new_value 
+                diff_attributes[yang_key] = new_value
     else:
         # if the key doesn't exist in the current config
         # just mark it as different using the new vlaue

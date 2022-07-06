@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -95,7 +95,7 @@ EXAMPLES = """
       vfid: -1
       ports:
         - name: "0/0"
-          enabled_state: False 
+          enabled_state: False
           npiv_pp_limit: 126
         - name: "0/1"
           persistent_disable: True
@@ -152,7 +152,9 @@ def main():
     ports = input_params['ports']
     result = {"changed": False}
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, throttle, vfid, "brocade_interface", "fibrechannel", ports, False, result, timeout)
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
+                throttle, vfid, "brocade_interface", "fibrechannel", ports,
+                False, result, timeout)
 
 
 if __name__ == '__main__':

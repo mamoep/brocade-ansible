@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -150,7 +150,9 @@ def main():
     generate_inputs = input_params['generate_inputs']
     result = {"changed": False}
 
-    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, "brocade_security", "security_certificate_generate", generate_inputs, result, timeout)
+    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https,
+                     ssh_hostkeymust, throttle, vfid, "brocade_security",
+                     "security_certificate_generate", generate_inputs, result, timeout)
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -91,7 +91,7 @@ options:
             If "user_name" is user account, only "new_password" is needed.
         required: true
         type: dict
-        
+
 '''
 
 
@@ -116,7 +116,7 @@ EXAMPLES = """
       obj_name: "password"
       attributes:
         user_name: "user"
-        new_password: "xxxx"  
+        new_password: "xxxx"
         old_password: "yyyy"
 
 """
@@ -180,7 +180,9 @@ def main():
     attributes = input_params['attributes']
     result = {"changed": False}
 
-    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https, ssh_hostkeymust, throttle, vfid, module_name, obj_name, attributes, result, timeout)
+    singleton_helper(module, fos_ip_addr, fos_user_name, fos_password, https,
+                     ssh_hostkeymust, throttle, vfid, module_name, obj_name,
+                     attributes, result, timeout)
 
 
 if __name__ == '__main__':

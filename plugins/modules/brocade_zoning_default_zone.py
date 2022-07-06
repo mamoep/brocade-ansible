@@ -41,7 +41,7 @@ options:
                 type: str
             https:
                 description:
-                - Encryption to use. True for HTTPS, self for self-signed HTTPS, 
+                - Encryption to use. True for HTTPS, self for self-signed HTTPS,
                   or False for HTTP
                 choices:
                     - True
@@ -54,7 +54,7 @@ options:
         required: true
     vfid:
         description:
-        - VFID of the switch. Use -1 for FOS without VF enabled or AG. 
+        - VFID of the switch. Use -1 for FOS without VF enabled or AG.
         type: int
         required: false
     throttle:
@@ -119,7 +119,6 @@ from ansible_collections.mamoep.brocade_fos.plugins.module_utils.brocade_zoning 
 from ansible.module_utils.basic import AnsibleModule
 
 
-
 def main():
     """
     Main function
@@ -154,8 +153,8 @@ def main():
         vfid = 128
 
     ret_code, auth, fos_version = login(fos_ip_addr,
-                           fos_user_name, fos_password,
-                           https, throttle, result, timeout)
+                                        fos_user_name, fos_password,
+                                        https, throttle, result, timeout)
     if ret_code != 0:
         module.exit_json(**result)
 
@@ -169,7 +168,7 @@ def main():
 
     diff_attributes = {}
     if (default_zone_access is not None and
-        default_zone_access != resp_effective["default_zone_access"]):
+            default_zone_access != resp_effective["default_zone_access"]):
         diff_attributes["default_zone_access"] = default_zone_access
 
     if len(diff_attributes) > 0:

@@ -39,6 +39,7 @@ def to_human_zoning(zoning_config):
 
     yang_to_human(zoning_config)
 
+
 def to_fos_zoning(zoning_config, result):
     human_to_yang(zoning_config)
 
@@ -182,6 +183,7 @@ def cfg_abort(fos_ip_addr, is_https, auth, vfid, result, timeout):
         "4</cfg-action></effective-configuration>"
     return url_patch(fos_ip_addr, is_https, auth, vfid, result,
                      full_effective_url, abort_str, timeout)
+
 
 def cfg_disable(fos_ip_addr, is_https, auth, vfid, result, checksum, timeout):
     """
@@ -517,6 +519,7 @@ def is_wwn(member):
     else:
         return False
 
+
 def process_member_diff(result, members, current_members):
     a_members = []
     r_members = []
@@ -650,8 +653,8 @@ def zoning_common(fos_ip_addr, https, auth, vfid, result, module, input_list,
 
     if input_list:
         ret_code, post_list, remove_list, common_list = type_diff_processing(result,
-                                                                input_list,
-                                                                c_list)
+                                                                             input_list,
+                                                                             c_list)
 
         result["post_list"] = post_list
         result["remove_list"] = remove_list
@@ -720,11 +723,11 @@ def zoning_common(fos_ip_addr, https, auth, vfid, result, module, input_list,
                     if cfgname is not None:
                         failed_msg = "CFG ENABLE failed"
                         ret_code = cfg_enable(fos_ip_addr, https, auth, vfid,
-                                            result, checksum, cfgname, timeout)
+                                              result, checksum, cfgname, timeout)
                     else:
                         failed_msg = "CFG SAVE failed"
                         ret_code = cfg_save(fos_ip_addr, https, auth, vfid,
-                                        result, checksum, timeout)
+                                            result, checksum, timeout)
                     if ret_code != 0:
                         ret_code = cfg_abort(fos_ip_addr, https,
                                              auth, vfid, result, timeout)
@@ -738,10 +741,10 @@ def zoning_common(fos_ip_addr, https, auth, vfid, result, module, input_list,
             if need_to_save or cfgname != active_cfg:
                 if not module.check_mode:
                     ret_code = cfg_enable(fos_ip_addr, https, auth, vfid,
-                                        result, checksum, active_cfg, timeout)
+                                          result, checksum, active_cfg, timeout)
                     if ret_code != 0:
                         ret_code = cfg_abort(fos_ip_addr, https,
-                                            auth, vfid, result, timeout)
+                                             auth, vfid, result, timeout)
                         result['msg'] = "CFG ENABLE failed"
                         result["failed"] = True
                         exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
@@ -809,7 +812,7 @@ def zoning_common(fos_ip_addr, https, auth, vfid, result, module, input_list,
                 result["changed"] = True
             elif active_cfg is None and cfgname is not None:
                 ret_code = cfg_disable(fos_ip_addr, https, auth, vfid, result,
-                                                          checksum, timeout)
+                                       checksum, timeout)
                 result["changed"] = True
 
             if ret_code != 0:
@@ -817,8 +820,9 @@ def zoning_common(fos_ip_addr, https, auth, vfid, result, module, input_list,
                 result["failed"] = True
                 result['msg'] = "CFG ENABLE failed"
                 exit_after_login(fos_ip_addr, https, auth, result, module, timeout)
-        
+
     return 0
+
 
 def obj_to_yml(obj):
     new_obj = {}
@@ -859,6 +863,7 @@ def obj_to_yml(obj):
                     new_obj[member_key].append(members)
 
     return new_obj
+
 
 def zoning_find_pair_common(module, fos_ip_addr, https, auth, vfid, type_str, obj_name, new_name, result, timeout):
     type_get = None
@@ -1087,11 +1092,11 @@ def zone_process_diff(result, zones, c_zones):
                     common_members = []
 
                 if ("principal_members" in zone and "principal-entry-name" in c_zone["member-entry"]):
-                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff( result, zone["principal_members"], c_zone["member-entry"] ["principal-entry-name"])
+                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff(result, zone["principal_members"], c_zone["member-entry"] ["principal-entry-name"])
                 elif ("principal_members" in zone and "principal-entry-name" not in c_zone["member-entry"]):
-                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff( result, zone["principal_members"], [])
+                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff(result, zone["principal_members"], [])
                 elif ("principal_members" not in zone and "principal-entry-name" in c_zone["member-entry"]):
-                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff( result, [], c_zone["member-entry"] ["principal-entry-name"])
+                    added_pmembers, removed_pmembers, common_pmembers = process_member_diff(result, [], c_zone["member-entry"] ["principal-entry-name"])
                 else:
                     added_pmembers = []
                     removed_pmembers = []
@@ -1233,4 +1238,3 @@ def cfg_process_diff_to_delete(result, cfgs, c_cfgs):
             delete_cfgs.append(cfg)
 
     return 0, delete_cfgs
-
