@@ -1,0 +1,36 @@
+namespace: mamoep
+
+name: brocade_fos
+
+version: 1.0.0
+
+readme: README.rst
+
+authors:
+- mamoep <26142342+mamoep@users.noreply.github.com>
+- Brocade Automation Team <Automation.BSN@broadcom.com>
+
+
+description: Collection of modules to manage Brocade FabricOS FibreChannel switches
+
+license:
+- GPL-2.0-or-later
+
+tags:
+  - brocade
+  - fos
+  - storage
+
+dependencies: {}
+
+# The URL of the originating SCM repository
+repository: https://github.com/mamoep/brocade-ansible
+
+# The URL to any online docs
+documentation: https://github.com/mamoep/brocade-ansible
+
+# The URL to the homepage of the collection/project
+homepage: https://github.com/mamoep/brocade-ansible
+
+# The URL to the collection issue tracker
+issues: https://github.com/mamoep/brocade-ansible/issues
