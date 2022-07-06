@@ -1,79 +1,24 @@
 FOS-Ansible Introduction
 ========================
 
-This repository provides reference example Modules & Playbooks for
-Ansible to manage Fibre Channel switches running different FOS versions.
-Tested with Ansible 4.5.0 running Python 3.8.5. Also, Tested with AWX
-13.0.0.
+This repository provides a collection of Modules & example Playbooks for
+Ansible to manage Brocade Fibre Channel switches running FabricOS version 8.2.3 and above.
 
-Installation from Github.com
-----------------------------
+This is a fork from https://github.com/brocade/ansible because Brocade decided to abandon the code.
+The latest branched code changes from Brocade was incorporated and the code was re-structured to fit the collection requirements.
 
-Step1: clone the repository
-
-::
-
-   HTTPS example:
-
-       git clone https://github.com/brocade/ansible
-
-Step2: Add library path ANSIBLE_LIBRARY variable
+Installation
+------------
 
 ::
+   ansible-galaxy collection install mamoep.brocade_fos
 
-   BASH example:
-
-       # if the repository is cloned under /home/myaccount/ansible
-
-       export ANSIBLE_LIBRARY="/home/myaccount/ansible/library"
-
-Step3: update ansible.cfg to point to utils directory for module_utils
-
-::
-
-   Example available under ansible.cfg
-
-Tower/AWX
----------
-
-tower_awx branch is now merged to master. Since playbooks and
-ansible.cfg are expected to be in the root directory for Tower/AWX, all
-playbooks and ansible.cfg are moved from tasks directory to root
-directory.
-
-Usage
-~~~~~
-
-Step 1: create a project within AWX and choose
-
-::
-
-   SCN TYPE to Git
-   SCM URL to https://github.com/brocade/ansible.git
-
-Step 2: create an inventory.
-
-Step 3: add a host to the inventory. Use san_eng_zone_seed_san_a in the
-host name field.
-
-Step 4: add the following to the variables for the host.
-
-::
-
-   ansible_connection: local
-   fos_ip_addr: <IP address of FOS switch>
-   fos_user_name: admin
-   fos_password: <FOS password for admin>
-   https: <False/True/self>
-
-These variables are used by playbooks available when choosing the
-project created above to connect to FOS switch.
 
 Connection to FOS
 -----------------
 
 Primary connection to FOS for playbooks is FOS REST connection. However,
-Some playbook attributes use ssh connect to augment the fuctionality.
+Some playbook attributes use ssh connect to augment the functionality.
 When those attributes are specified in the playbooks, be sure that the
 FOS switch being used to connect is part of known hosts by where
 ansible-playbook is being executed or where AWX job is being executed.
