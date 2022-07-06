@@ -11,6 +11,7 @@ Installation
 ------------
 
 ::
+
    ansible-galaxy collection install mamoep.brocade_fos
 
 
