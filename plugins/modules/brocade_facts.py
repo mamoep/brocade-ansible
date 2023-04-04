@@ -240,7 +240,7 @@ def main():
         vfid=dict(required=False, type='int'),
         throttle=dict(required=False, type='float'),
         timeout=dict(required=False, type='float'),
-        gather_subset=dict(required=True, type='list'))
+        gather_subset=dict(required=False, type='list'))
 
     module = AnsibleModule(
         argument_spec=argument_spec,
