@@ -165,7 +165,7 @@ def main():
         throttle=dict(required=False, type='float'),
         timeout=dict(required=False, type='float'),
         user_configs=dict(required=False, type='list'),
-        delete_user_configs=dict(required=False, type='list'))
+        delete_user_configs=dict(required=False, type='list', no_log=True))
 
     module = AnsibleModule(
         argument_spec=argument_spec,
