@@ -1,5 +1,5 @@
 ---
-title: FOS-Ansible Introduction
+# FOS-Ansible Introduction
 ---
 
 This repository provides a collection of Modules & example Playbooks for
@@ -11,11 +11,11 @@ decided to abandon the code. The latest branched code changes from
 Brocade was incorporated and the code was re-structured to fit the
 collection requirements.
 
-# Installation
+## Installation
 
     ansible-galaxy collection install mamoep.brocade_fos
 
-# Connection to FOS
+## Connection to FOS
 
 Primary connection to FOS for playbooks is FOS REST connection. However,
 Some playbook attributes use ssh connect to augment the functionality.
@@ -58,7 +58,7 @@ section for AWX job template.
       https: "{{fos_https}}"
       ssh_hostkeymust: False
 
-# How to create playbooks
+## How to create playbooks
 
 When creating Zoning playbooks, Zoning specific modules are used. This
 is to hide some of the Zoning specific operational complexities that
@@ -66,7 +66,7 @@ would otherwise be exposed if using generic templates. However, most
 other REST FOS objects can be addressed by common template modules:
 brocade_single_obj and brocade_list_obj.
 
-## Zoning
+### Zoning
 
 Using brocade_zoning_alias, brocade_zoning_zone, and brocade_zoning_cfg
 modules, playbooks can be created to update Alias, Zone, or CFG in FOS
@@ -171,7 +171,7 @@ can be saved to a file and referenced in playbooks. Please refer to
 github.com/brocade/pyfos for PyFOS details and tasks/zonedb.yml and
 tasks/zoning_act.yml for reference.
 
-## Yang module/object specific Ansible modules
+### Yang module/object specific Ansible modules
 
 Here are the list of additional Ansible modules beyond Zoning. These
 modules typically take a dictionary or a list of dictionary. The
@@ -240,7 +240,7 @@ within Ansible playbook.
   brocade_time_time_zone.py           update time zone
   -----------------------------------------------------------------------
 
-## How to add attribute input to modules
+### How to add attribute input to modules
 
 As documented above, attributes passed to modules mirror Yang REST
 attribute name, except replacing "-" with \"\_\" to aid Ansible
@@ -377,7 +377,7 @@ maintain consistencies and to help with readability of playbooks.
   nt.py                   rd                      
   -----------------------------------------------------------------------
 
-## Template based Ansible modules
+### Template based Ansible modules
 
 REST Yang objects that have yet been addressed by Yang module/object
 specific Ansible modules, template based Ansible modules can be used to
@@ -386,7 +386,7 @@ generally work well with most REST Yang modules, some RET Yang objects
 specific may not be handled properly. So, it is recommended that Yang
 module/object specific Ansible modules be used preferably.
 
-### Singleton object
+#### Singleton object
 
 A singleton object refers to a FOS REST object that is only one of the
 kind on FOS switch. Yang definition of container is used to define this
@@ -458,7 +458,7 @@ based on the playbooks under tasks directory
   brocade_time                         clock_server
   brocade_time                         time_zone
 
-### List object
+#### List object
 
 A list object refers to a FOS REST object that can contain multiple
 entries on FOS switch. Yang definition of list is used to define this
@@ -543,6 +543,6 @@ based on the playbooks under tasks directory
   brocade_security              user_config
   brocade-security              ipfilter-rule
 
-# Contact
+## Contact
 
 Use the issue tracker

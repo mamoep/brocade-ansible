@@ -149,7 +149,7 @@ def main():
     n_port_map = input_params['n_port_map']
     result = {"changed": False}
 
-    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True, 
+    list_helper(module, fos_ip_addr, fos_user_name, fos_password, https, True,
                 throttle, vfid, "brocade_access_gateway", "n_port_map",
                 n_port_map, False, result, timeout)
 
